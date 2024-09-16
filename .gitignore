@@ -2,7 +2,6 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
 #
-/[Aa]ssets/[Ss]prites/Raw/*
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
@@ -71,3 +70,9 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# Raw
+Assets/Sprites/Raw/*
+!Assets/Sprites/Raw/.gitkeep
+
+# murasanca
