@@ -42,7 +42,8 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 12
+  serializedVersion: 13
+  m_BakeOnSceneLoad: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -1336,6 +1337,7 @@ GameObject:
   - component: {fileID: 250298082}
   - component: {fileID: 250298084}
   - component: {fileID: 250298081}
+  - component: {fileID: 250298086}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -2600,6 +2602,18 @@ MonoBehaviour:
   - {fileID: 334251939}
   - {fileID: 320679101}
   - {fileID: 1329885350}
+--- !u!114 &250298086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 250298080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c561758b44318c1419ea746c1eaca0df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &273120227
 GameObject:
   m_ObjectHideFlags: 0
@@ -4411,7 +4425,6 @@ MonoBehaviour:
   m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
-  m_Version: 2
   m_TaaSettings:
     m_Quality: 3
     m_FrameInfluence: 0.1
@@ -4419,6 +4432,7 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+  m_Version: 2
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -7704,9 +7718,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IsGlobal: 1
-  priority: 0
-  blendDistance: 0
-  weight: 1
+  m_Priority: 0
+  m_BlendDistance: 0
+  m_Weight: 1
   sharedProfile: {fileID: 11400000, guid: 13dabefcc7b081f4b9058437cf0e2a5d, type: 2}
 --- !u!4 &958042767
 Transform:
@@ -12629,50 +12643,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1829869800}
   m_CullTransparentMesh: 1
---- !u!1 &1849100262
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1849100264}
-  - component: {fileID: 1849100263}
-  m_Layer: 0
-  m_Name: SteamManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
---- !u!114 &1849100263
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1849100262}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c561758b44318c1419ea746c1eaca0df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1849100264
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1849100262}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1860866895
 GameObject:
   m_ObjectHideFlags: 0
@@ -14912,4 +14882,3 @@ SceneRoots:
   - {fileID: 619394802}
   - {fileID: 958042767}
   - {fileID: 519420032}
-  - {fileID: 1849100264}
