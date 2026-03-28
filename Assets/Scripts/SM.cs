@@ -1,6 +1,6 @@
 // murasanca
 
-#if!(UNITY_STANDALONE_WIN||UNITY_STANDALONE_LINUX||UNITY_STANDALONE_OSX||STEAMWORKS_WIN||STEAMWORKS_LIN_OSX)
+#if!(STEAMWORKS_LIN_OSX||STEAMWORKS_WIN||UNITY_STANDALONE_LINUX||UNITY_STANDALONE_OSX||UNITY_STANDALONE_WIN)
 #define DISABLESTEAMWORKS
 #endif
 
@@ -16,16 +16,18 @@ using UnityEngine;
 namespace murasanca
 {
     /// <summary>
-    /// SteamManager
+    /// ManagerSteam
     /// </summary>
     [DisallowMultipleComponent]
-    public class SM:MonoBehaviour
+    public class MS:MonoBehaviour
     {
-#if!DISABLESTEAMWORKS
+#if DISABLESTEAMWORKS
+	public static bool Initialized=>false;
+#else // !DISABLESTEAMWORKS
         protected static bool s_EverInitialized=false;
 
-        protected static SM s_instance;
-        protected static SM Instance=>s_instance==null?new GameObject("SteamManager").AddComponent<SM>():s_instance;
+        protected static MS ms;
+        protected static MS Instance=>ms==null?new GameObject("MS").AddComponent<MS>():ms;
 
         protected bool m_bInitialized=false;
         public static bool Initialized=>Instance.m_bInitialized;
@@ -40,23 +42,23 @@ namespace murasanca
         private static void InitOnPlayMode()
         {
             s_EverInitialized=false;
-            s_instance=null;
+            ms=null;
         }
 #endif
 
         protected virtual void Awake()
         {
-            if(s_instance!=null)
+            if(ms!=null)
             {
                 Destroy(gameObject);
                 return;
             }
-            s_instance=this;
+            ms=this;
 
             if(s_EverInitialized)
                 throw new System.Exception("Tried to Initialize the SteamAPI twice in one session!");
 
-            DontDestroyOnLoad(gameObject);
+            // DontDestroyOnLoad(gameObject);
 
             if(!Packsize.Test())
                 Debug.LogError("[Steamworks.NET] Packsize Test returned false, the wrong version of Steamworks.NET is being run in this platform.",this);
@@ -64,9 +66,10 @@ namespace murasanca
             if(!DllCheck.Test())
                 Debug.LogError("[Steamworks.NET] DllCheck Test returned false, One or more of the Steamworks binaries seems to be the wrong version.",this);
 
+#if!UNITY_EDITOR
             try
             {
-                if(SteamAPI.RestartAppIfNecessary((AppId_t)3103000)) // AppId_t.Invalid
+                if(SteamAPI.RestartAppIfNecessary((AppId_t)U.a))
                 {
                     Debug.Log("[Steamworks.NET] Shutting down because RestartAppIfNecessary returned true. Steam will restart the application.");
 
@@ -81,6 +84,7 @@ namespace murasanca
                 Application.Quit();
                 return;
             }
+#endif // !UNITY_EDITOR
 
             m_bInitialized=SteamAPI.Init();
             if(!m_bInitialized)
@@ -95,8 +99,8 @@ namespace murasanca
 
         protected virtual void OnEnable()
         {
-            if(s_instance==null)
-                s_instance=this;
+            if(ms==null)
+                ms=this;
 
             if(!m_bInitialized)
                 return;
@@ -110,10 +114,10 @@ namespace murasanca
 
         protected virtual void OnDestroy()
         {
-            if(s_instance!=this)
+            if(ms!=this)
                 return;
 
-            s_instance=null;
+            ms=null;
 
             if(!m_bInitialized)
                 return;
@@ -128,9 +132,7 @@ namespace murasanca
 
             SteamAPI.RunCallbacks();
         }
-#else
-    public static bool Initialized=>false;
-#endif // !DISABLESTEAMWORKS
+#endif // DISABLESTEAMWORKS
     }
 }
 

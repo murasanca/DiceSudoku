@@ -277,7 +277,7 @@ namespace murasanca
                             eS.A(wAC[Random.Range(0,3)]);
                         }
 
-                        if(SM.Initialized)
+                        if(MS.Initialized)
                         {
                             _=SteamUserStats.IndicateAchievementProgress("8",(uint)JSON.L,900);
                             _=SteamUserStats.SetStat("l",JSON.L);
